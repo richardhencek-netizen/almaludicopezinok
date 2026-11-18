@@ -1,0 +1,218 @@
+---
+layout: base.njk
+permalink: /
+---
+{#- Farby podľa manuálu: poradie zelená → koralová → svetlomodrá (→ oranžová) sa nemení -#}
+{%- set farby = ["green", "coral", "sky", "orange"] -%}
+{%- set farbyHex = ["#7FBA91", "#E25A50", "#6098EA", "#F6A700"] -%}
+{%- set farbyText = ["green-t", "coral-t", "sky-t", "orange-t"] -%}
+{%- macro tel(cislo) -%}{{ cislo | replace(" ", "") }}{%- endmacro -%}
+{%- macro hodnota(v) -%}{% if v %}<span>{{ v }}</span>{% else %}<span class="tbd">doplníme</span>{% endif %}{%- endmacro -%}
+<main id="obsah">
+<!-- ============ ÚVOD ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">{{ uvod.nadpis_nad }}</span>
+      <h1>{{ uvod.nadpis }} <span class="accent">{{ uvod.nadpis_zvyraznenie }}</span></h1>
+      <p class="lead">{{ uvod.perex }}</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#kontakt">{{ uvod.tlacidlo_hlavne }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#ponuka">{{ uvod.tlacidlo_vedlajsie }}</a>
+      </div>
+      <div class="hero-meta">
+        {%- for b in uvod.body %}
+        <span><i class="dot" style="border-color:var(--{{ farby[loop.index0 % 4] }})"></i>{{ b }}</span>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <svg class="hero-arc" viewBox="0 0 300 160" fill="none" aria-hidden="true">
+        <path d="M14 150 C 70 50, 190 10, 290 22" stroke="#F6A700" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <div class="arch"><img src="{{ uvod.fotka }}" alt="{{ uvod.fotka_popis }}" fetchpriority="high"></div>
+      <div class="badge">
+        <svg class="ring" viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="19" stroke="#F6A700" stroke-width="2.5"/><path d="M14 22.5l5.5 5.5L30 17" stroke="#213164" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><strong>{{ uvod.odznak_nadpis }}</strong><small>{{ uvod.odznak_text }}</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="facts reveal">
+    {%- for f in uvod.fakty %}
+    <div class="fact" style="--c:var(--{{ farby[loop.index0 % 4] }})"><b>{{ f.hodnota }}</b><span>{{ f.popis }}</span></div>
+    {%- endfor %}
+  </div>
+</div>
+
+<!-- ============ PROGRAM ============ -->
+<section id="program" style="margin-top:110px" class="cream">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">{{ program.nadpis_nad }}</span>
+      <h2>{{ program.nadpis }}</h2>
+      <p class="lead" style="margin-top:24px">{{ program.perex }}</p>
+      <div class="name-card">
+        <div class="name-row"><b>Alma</b><span>{{ program.vyznam_alma }}</span></div>
+        <div class="name-row"><b>Ludico</b><span>{{ program.vyznam_ludico }}</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <h3 style="font-size:1.5rem">{{ program.podnadpis }}</h3>
+      <ul class="checks">
+        {%- for a in program.aktivity %}
+        <li><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="13" stroke="{{ farbyHex[loop.index0 % 4] }}" stroke-width="2"/><path d="M10.5 16.5l3.5 3.5 7.5-8" stroke="#213164" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>{{ a.nazov }}</b> {{ a.text }}</div></li>
+        {%- endfor %}
+      </ul>
+      {% if program.citat %}<blockquote class="quote">{{ program.citat }}<cite>{{ program.citat_zdroj }}</cite></blockquote>{% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ PONUKA ============ -->
+<section id="ponuka">
+  <div class="wrap">
+    <div class="head reveal">
+      <div><span class="eyebrow">{{ ponuka.nadpis_nad }}</span><h2>{{ ponuka.nadpis }}</h2></div>
+      <p class="lead">{{ ponuka.perex }}</p>
+    </div>
+    <div class="path">
+      <svg class="path-arc" viewBox="0 0 1000 60" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M0 58 C 300 0, 700 0, 1000 20" stroke="#F6A700" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+      <div class="cards">
+        {%- for p in ponuka.programy %}
+        {%- set i = loop.index0 % 3 %}{% set h = farbyHex[i] %}
+        <article class="card reveal" style="--c:var(--{{ farby[i] }});--ct:var(--{{ farbyText[i] }})">
+          {%- if i == 0 %}
+          <svg class="icon" viewBox="0 0 58 58" fill="none" aria-hidden="true"><circle cx="29" cy="29" r="27" stroke="{{ h }}" stroke-width="2"/><circle cx="29" cy="22" r="5.5" stroke="{{ h }}" stroke-width="2.4"/><path d="M17 41c0-7 5.5-12 12-12s12 5 12 12c0 1.5-1.2 2-2.2 1.2-2.3-2.2-5.800-3.7-9.8-3.7s-7.5 1.5-9.8 3.7c-1 .8-2.2.3-2.2-1.2z" stroke="{{ h }}" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          {%- elif i == 1 %}
+          <svg class="icon" viewBox="0 0 58 58" fill="none" aria-hidden="true"><circle cx="29" cy="29" r="27" stroke="{{ h }}" stroke-width="2"/><circle cx="29" cy="18.5" r="5" stroke="{{ h }}" stroke-width="2.4"/><path d="M15 25.5l11 3.2v4.3l-6 12h2.8l6.2-8 6.2 8H38l-6-12v-4.3l11-3.2" stroke="{{ h }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- else %}
+          <svg class="icon" viewBox="0 0 58 58" fill="none" aria-hidden="true"><circle cx="29" cy="29" r="27" stroke="{{ h }}" stroke-width="2"/><circle cx="29" cy="16" r="5" stroke="{{ h }}" stroke-width="2.4"/><path d="M29 21c-4 3-4 12 0 22M29 21c4 3 4 12 0 22M20 44c3-1.5 6-1.8 9-1M38 44c-3-1.5-6-1.8-9-1" stroke="{{ h }}" stroke-width="2.4" stroke-linecap="round"/></svg>
+          {%- endif %}
+          <span class="age">{{ p.vek }}</span>
+          <h3>{{ p.nazov }}</h3>
+          <p>{{ p.popis }}</p>
+          <ul class="specs">
+            {%- for u in p.udaje %}
+            <li><span>{{ u.polozka }}</span>{{ hodnota(u.hodnota) }}</li>
+            {%- endfor %}
+          </ul>
+          <a class="btn {{ 'btn-primary' if p.zvyraznit else 'btn-ghost' }}" href="#kontakt">{{ p.tlacidlo or "Mám záujem" }}</a>
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+
+    {% if ponuka.galeria and ponuka.galeria.length %}
+    <div class="gallery reveal" aria-label="Fotografie z priestorov">
+      {%- for g in ponuka.galeria %}
+      <figure><img src="{{ g.fotka }}" alt="{{ g.popis }}" loading="lazy"></figure>
+      {%- endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ============ RODIČIA ============ -->
+<section id="rodicia" class="cream">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">{{ rodicia.nadpis_nad }}</span>
+      <h2>{{ rodicia.nadpis }}</h2>
+      <p class="lead" style="margin-top:24px">{{ rodicia.perex }}</p>
+      <div class="events">
+        {%- for e in rodicia.podujatia %}
+        <div class="event"><span class="kind">{{ e.typ }}</span><div><h3>{{ e.nazov }}</h3><p>{{ e.popis }}</p></div></div>
+        {%- endfor %}
+      </div>
+      {% if rodicia.poznamka %}<p style="margin-top:28px;font-size:1rem">{{ rodicia.poznamka }} <a href="https://www.instagram.com/{{ nastavenia.instagram }}/">@{{ nastavenia.instagram }}</a>.</p>{% endif %}
+    </div>
+    {% set c = rodicia.clanok %}
+    <article class="article reveal">
+      {% if c.fotka %}<img src="{{ c.fotka }}" alt="{{ c.fotka_popis }}" loading="lazy">{% endif %}
+      <div class="article-body">
+        <span class="eyebrow" style="margin-bottom:12px">{{ c.stitok }}</span>
+        <h3>{{ c.nadpis }}</h3>
+        <p>{{ c.perex }}</p>
+        <ol class="steps">
+          {%- for b in c.body %}
+          <li><span><b>{{ b.zvyraznene }}</b> {{ b.text }}</span></li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DOBRÉ VEDIEŤ ============ -->
+<section>
+  <div class="wrap">
+    <div class="head reveal"><div><span class="eyebrow">{{ dobre_vediet.nadpis_nad }}</span><h2>{{ dobre_vediet.nadpis }}</h2></div></div>
+    <div class="info">
+      {%- for p in dobre_vediet.polozky %}
+      <div class="info-item reveal" style="--c:var(--{{ farby[loop.index0 % 4] }})"><h3>{{ p.nazov }}</h3><p>{{ p.text }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ O NÁS ============ -->
+<section id="o-nas" class="cream">
+  <div class="wrap">
+    <div class="head reveal">
+      <div><span class="eyebrow">{{ tim.nadpis_nad }}</span><h2>{{ tim.nadpis }}</h2></div>
+      <p class="lead">{{ tim.perex }}</p>
+    </div>
+    <div class="team">
+      {%- for o in tim.ludia %}
+      <div class="person reveal"><div class="avatar{% if o.fotka %} has-photo{% endif %}" style="--c:var(--{{ farby[loop.index0 % 4] }})">{% if o.fotka %}<img src="{{ o.fotka }}" alt="{{ o.meno }}" loading="lazy">{% else %}{{ o.meno | first }}{% endif %}</div><div><h3>{{ o.meno }}</h3><p>{{ o.popis }}</p></div></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt" class="contact">
+  <svg class="contact-arc" viewBox="0 0 300 160" fill="none" aria-hidden="true"><path d="M14 150 C 70 50, 190 10, 290 22" stroke="#F6A700" stroke-width="5" stroke-linecap="round"/></svg>
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">{{ kontakt.nadpis_nad }}</span>
+      <h2>{{ kontakt.nadpis }}</h2>
+      <p class="lead" style="margin:24px 0 40px">{{ kontakt.perex }}</p>
+      <ul class="contact-list">
+        <li><span class="k">Adresa</span><span class="v">{{ nastavenia.adresa_ulica }}<br>{{ nastavenia.adresa_mesto }}{% if nastavenia.odkaz_na_mapu %}<br><a href="{{ nastavenia.odkaz_na_mapu }}" style="font-size:1rem;font-weight:400;opacity:.85;text-decoration:underline;text-underline-offset:4px">Otvoriť v mapách</a>{% endif %}</span></li>
+        <li><span class="k">Telefón</span><a href="tel:{{ tel(nastavenia.telefon) }}">{{ nastavenia.telefon }}</a></li>
+        <li><span class="k">E-mail</span><span>{% for m in nastavenia.emaily %}<a href="mailto:{{ m }}">{{ m }}</a>{% if not loop.last %}<br>{% endif %}{% endfor %}</span></li>
+        {% if nastavenia.instagram %}<li><span class="k">Instagram</span><a href="https://www.instagram.com/{{ nastavenia.instagram }}/">@{{ nastavenia.instagram }}</a></li>{% endif %}
+        {% if nastavenia.facebook %}<li><span class="k">Facebook</span><a href="{{ nastavenia.facebook }}">Alma Ludico Pezinok</a></li>{% endif %}
+      </ul>
+    </div>
+    <form class="form reveal" name="prihlaska" method="POST" action="/dakujeme" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="prihlaska">
+      <input type="hidden" name="subject" value="Nová prihláška z webu Alma Ludico Pezinok">
+      <p class="hp" aria-hidden="true"><label>Nevypĺňajte: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <h3>{{ kontakt.formular_nadpis }}</h3>
+      <div class="row">
+        <label class="field"><span>Meno rodiča *</span><input name="meno" required autocomplete="name"></label>
+        <label class="field"><span>Telefón</span><input name="telefon" type="tel" autocomplete="tel" inputmode="tel"></label>
+      </div>
+      <label class="field"><span>E-mail *</span><input name="email" type="email" required autocomplete="email"></label>
+      <div class="row">
+        <label class="field"><span>Meno dieťaťa</span><input name="dieta"></label>
+        <label class="field"><span>Vek dieťaťa *</span>
+          <select name="vek" required><option value="">Vyberte</option><option>4 – 12 mesiacov</option><option>1 – 2 roky</option><option>2 – 4 roky</option></select></label>
+      </div>
+      <label class="field"><span>Mám záujem o *</span>
+        <select name="zaujem" required>{% for z in kontakt.moznosti_zaujmu %}<option>{{ z }}</option>{% endfor %}</select></label>
+      <label class="field"><span>Správa</span><textarea name="sprava" rows="3" placeholder="Napr. ktoré dni vám vyhovujú"></textarea></label>
+      <label class="check"><input type="checkbox" name="suhlas" value="áno" required><span>Súhlasím so spracovaním osobných údajov na účel vybavenia prihlášky. *</span></label>
+      <button class="btn btn-white" type="submit">Odoslať prihlášku
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+  </div>
+</section>
+</main>

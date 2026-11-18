@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titulok or nastavenia.seo_titulok }}</title>
+<meta name="description" content="{{ nastavenia.seo_popis }}">
+{% if noindex %}<meta name="robots" content="noindex">{% endif %}
+<meta property="og:title" content="Alma Ludico Pezinok">
+<meta property="og:description" content="{{ nastavenia.seo_popis }}">
+<meta property="og:image" content="/img/og.png">
+<meta name="theme-color" content="#213164">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/jost-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v={{ build }}">
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+<a class="skip" href="#obsah">Preskočiť na obsah</a>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Alma Ludico Pezinok – úvod"><img src="/logo.svg" alt="Alma Ludico" width="225" height="114"></a>
+    {% if not jednoducha_hlavicka %}
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="/#program">Program</a></li>
+      <li><a href="/#ponuka">Ponuka</a></li>
+      <li><a href="/#rodicia">Pre rodičov</a></li>
+      <li><a href="/#o-nas">O nás</a></li>
+      <li><a href="/#kontakt">Kontakt</a></li>
+      <li><a class="btn btn-primary" href="/#kontakt">{{ nastavenia.tlacidlo_v_menu }}</a></li>
+    </ul>
+    {% endif %}
+  </div>
+</header>
+
+{{ content | safe }}
+
+<footer>
+  <div class="wrap foot">
+    <img src="/logo-white.svg" alt="Alma Ludico" width="225" height="114">
+    <span>{{ nastavenia.paticka }}</span>
+    <a href="#top">Späť hore ↑</a>
+  </div>
+</footer>
+<script src="/main.js?v={{ build }}" defer></script>
+</body>
+</html>

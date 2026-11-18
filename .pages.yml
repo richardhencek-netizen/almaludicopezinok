@@ -1,0 +1,387 @@
+# Pages CMS – admin pre web Alma Ludico Pezinok
+# Upravuje súbory v src/_data. Po uložení Netlify web sám znova zverejní (cca 1 min).
+
+media:
+  input: src/img
+  output: /img
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  # ---------------------------------------------------------------- ÚVOD
+  - name: uvod
+    label: "1 · Úvod (hlavička stránky)"
+    type: file
+    path: src/_data/uvod.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Hlavný nadpis – modrá časť
+        type: string
+        required: true
+      - name: nadpis_zvyraznenie
+        label: Hlavný nadpis – koralová časť
+        description: Pokračovanie nadpisu, zobrazí sa farebne.
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: tlacidlo_hlavne
+        label: Hlavné tlačidlo
+        type: string
+      - name: tlacidlo_vedlajsie
+        label: Vedľajšie tlačidlo
+        type: string
+      - name: body
+        label: Krátke body pod tlačidlami
+        description: Ideálne 3 krátke body.
+        type: string
+        list: true
+      - name: fotka
+        label: Hlavná fotka
+        description: Najlepšie na výšku alebo štvorec, aspoň 1200 px na šírku.
+        type: image
+      - name: fotka_popis
+        label: Popis fotky (pre nevidiacich a Google)
+        type: string
+      - name: odznak_nadpis
+        label: Biela bublina na fotke – nadpis
+        type: string
+      - name: odznak_text
+        label: Biela bublina na fotke – text
+        type: string
+      - name: fakty
+        label: Pás s číslami pod úvodom
+        description: Ideálne 4 položky.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{hodnota}"
+        fields:
+          - name: hodnota
+            label: Veľký text
+            type: string
+          - name: popis
+            label: Malý text pod ním
+            type: string
+
+  # ---------------------------------------------------------------- PROGRAM
+  - name: program
+    label: "2 · Program Alma Ludico"
+    type: file
+    path: src/_data/program.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: vyznam_alma
+        label: Význam slova „Alma“
+        type: string
+      - name: vyznam_ludico
+        label: Význam slova „Ludico“
+        type: string
+      - name: podnadpis
+        label: Nadpis zoznamu aktivít
+        type: string
+      - name: aktivity
+        label: Čo dieťa na lekciách robí
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nazov}"
+        fields:
+          - name: nazov
+            label: Názov (tučne)
+            type: string
+          - name: text
+            label: Text
+            type: text
+      - name: citat
+        label: Citát
+        description: Necháte prázdne = citát sa nezobrazí.
+        type: text
+      - name: citat_zdroj
+        label: Zdroj citátu
+        type: string
+
+  # ---------------------------------------------------------------- PONUKA
+  - name: ponuka
+    label: "3 · Ponuka (lekcie a ceny)"
+    type: file
+    path: src/_data/ponuka.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: programy
+        label: Programy (karty)
+        description: Farby kariet sa priraďujú podľa poradia – zelená, koralová, svetlomodrá.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nazov} ({vek})"
+        fields:
+          - name: vek
+            label: Vek
+            type: string
+          - name: nazov
+            label: Názov programu
+            type: string
+          - name: popis
+            label: Popis
+            type: text
+          - name: udaje
+            label: Údaje (kedy, dĺžka, cena…)
+            description: Prázdna hodnota sa na webe zobrazí ako „doplníme“.
+            type: object
+            list: true
+            fields:
+              - name: polozka
+                label: Položka
+                type: string
+              - name: hodnota
+                label: Hodnota
+                type: string
+          - name: tlacidlo
+            label: Text tlačidla
+            type: string
+          - name: zvyraznit
+            label: Zvýrazniť tlačidlo (tmavomodré)
+            type: boolean
+      - name: galeria
+        label: Fotky pod kartami
+        description: Ideálne 3 fotky, na šírku.
+        type: object
+        list: true
+        fields:
+          - name: fotka
+            label: Fotka
+            type: image
+          - name: popis
+            label: Popis fotky
+            type: string
+
+  # ---------------------------------------------------------------- RODIČIA
+  - name: rodicia
+    label: "4 · Pre rodičov (podujatia, článok)"
+    type: file
+    path: src/_data/rodicia.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: podujatia
+        label: Podujatia
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{typ}: {nazov}"
+        fields:
+          - name: typ
+            label: Typ (Workshop, Beseda…)
+            type: string
+          - name: nazov
+            label: Názov
+            type: string
+          - name: popis
+            label: Popis (môžete pridať aj dátum)
+            type: text
+      - name: poznamka
+        label: Veta pred odkazom na Instagram
+        description: Necháte prázdne = veta sa nezobrazí.
+        type: string
+      - name: clanok
+        label: Článok vpravo
+        type: object
+        fields:
+          - name: stitok
+            label: Malý nápis
+            type: string
+          - name: nadpis
+            label: Nadpis
+            type: string
+          - name: perex
+            label: Text
+            type: text
+          - name: fotka
+            label: Fotka
+            type: image
+          - name: fotka_popis
+            label: Popis fotky
+            type: string
+          - name: body
+            label: Číslované body
+            type: object
+            list: true
+            fields:
+              - name: zvyraznene
+                label: Slovo tučne
+                type: string
+              - name: text
+                label: Zvyšok vety
+                type: string
+
+  # ---------------------------------------------------------------- DOBRÉ VEDIEŤ
+  - name: dobre_vediet
+    label: "5 · Dobré vedieť"
+    type: file
+    path: src/_data/dobre_vediet.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: polozky
+        label: Položky
+        description: Ideálne 4 položky.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nazov}"
+        fields:
+          - name: nazov
+            label: Nadpis
+            type: string
+          - name: text
+            label: Text
+            type: text
+
+  # ---------------------------------------------------------------- TÍM
+  - name: tim
+    label: "6 · O nás (tím)"
+    type: file
+    path: src/_data/tim.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: ludia
+        label: Ľudia
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{meno}"
+        fields:
+          - name: meno
+            label: Meno
+            type: string
+          - name: popis
+            label: Čo robí
+            type: text
+          - name: fotka
+            label: Fotka (nepovinná)
+            description: Štvorcová fotka tváre. Bez fotky sa zobrazí začiatočné písmeno.
+            type: image
+
+  # ---------------------------------------------------------------- KONTAKT
+  - name: kontakt
+    label: "7 · Kontakt a formulár"
+    type: file
+    path: src/_data/kontakt.yml
+    format: yaml
+    fields:
+      - name: nadpis_nad
+        label: Malý nápis nad nadpisom
+        type: string
+      - name: nadpis
+        label: Nadpis
+        type: string
+      - name: perex
+        label: Úvodný text
+        type: text
+      - name: formular_nadpis
+        label: Nadpis formulára
+        type: string
+      - name: moznosti_zaujmu
+        label: Možnosti v políčku „Mám záujem o“
+        type: string
+        list: true
+      - name: dakujeme_nadpis
+        label: Stránka po odoslaní – nadpis
+        type: string
+      - name: dakujeme_text
+        label: Stránka po odoslaní – text
+        description: Za text sa automaticky pridá telefónne číslo.
+        type: text
+
+  # ---------------------------------------------------------------- NASTAVENIA
+  - name: nastavenia
+    label: "⚙ Kontaktné údaje a nastavenia"
+    type: file
+    path: src/_data/nastavenia.yml
+    format: yaml
+    fields:
+      - name: telefon
+        label: Telefón
+        type: string
+      - name: emaily
+        label: E-maily
+        type: string
+        list: true
+      - name: adresa_ulica
+        label: Adresa – ulica
+        type: string
+      - name: adresa_mesto
+        label: Adresa – mesto, poschodie
+        type: string
+      - name: odkaz_na_mapu
+        label: Odkaz na mapu
+        type: string
+      - name: instagram
+        label: Instagram (len meno účtu, bez @)
+        type: string
+      - name: facebook
+        label: Facebook (celý odkaz, nepovinné)
+        type: string
+      - name: tlacidlo_v_menu
+        label: Tlačidlo v menu
+        type: string
+      - name: paticka
+        label: Text v pätičke
+        type: string
+      - name: seo_titulok
+        label: Názov stránky v Google a v záložke prehliadača
+        type: string
+      - name: seo_popis
+        label: Popis stránky v Google
+        type: text

@@ -1,11 +1,22 @@
 # Alma Ludico Pezinok – web
 
-Statický web detského centra Alma Ludico Pezinok (deti od 4 mesiacov do 4 rokov).
-Dizajn podľa Alma Ludico dizajn manuálu v2.
+Web detského centra Alma Ludico Pezinok (deti od 4 mesiacov do 4 rokov), dizajn podľa Alma Ludico dizajn manuálu v2.
 
-- `index.html` – celá stránka (HTML + CSS + JS)
-- `logo.svg`, `logo-white.svg`, `favicon.svg` – logo extrahované z manuálu
-- `fonts/` – Jost (SIL OFL), hostované lokálne
-- `img/` – ilustračné fotky (nahradiť vlastnými)
+## Úprava textov
+Texty sa upravujú v adminovi **Pages CMS** (https://app.pagescms.org) – nastavenie je v `.pages.yml`.
+Každá sekcia webu má vlastný súbor v `src/_data/*.yml`. Po uložení Netlify web sám zverejní (cca 1 min).
 
-Nasadenie: GitHub Pages → Settings → Pages → Deploy from a branch → `main` / root.
+## Štruktúra
+- `src/index.njk`, `src/dakujeme.njk` – šablóny (Eleventy + Nunjucks)
+- `src/_includes/base.njk` – hlavička, pätička
+- `src/_data/` – obsah (texty, ceny, tím, kontakty)
+- `src/style.css`, `src/main.js` – dizajn a správanie
+- `src/img/` – fotky (sem ukladá aj admin)
+- `src/fonts/` – Jost (SIL OFL)
+
+## Lokálne
+```
+npm install
+npm start
+```
+Nasadenie: Netlify (build `npm run build`, publish `_site`) – nastavené v `netlify.toml`.
