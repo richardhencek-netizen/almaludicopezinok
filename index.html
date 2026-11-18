@@ -186,7 +186,7 @@ header.scrolled{border-color:var(--line)}
 .contact{background:var(--navy);color:#fff;position:relative;overflow:hidden}
 .contact .eyebrow{color:#fff;opacity:.8}
 .contact .lead{color:rgba(255,255,255,.82)}
-.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:start}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .contact-list{list-style:none;padding:0;margin:0;display:grid;gap:0;border-top:1px solid rgba(255,255,255,.18)}
 .contact-list li{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.18)}
 .contact-list .k{font-size:.78rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.75;padding-top:4px}
@@ -197,6 +197,19 @@ header.scrolled{border-color:var(--line)}
 .contact .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
 .contact .btn-ghost:hover{background:#fff;color:var(--navy)}
 .contact-arc{position:absolute;right:-120px;bottom:-60px;width:520px;opacity:.9;pointer-events:none}
+/* Formulár */
+.form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:36px;display:grid;gap:16px;position:relative;z-index:1}
+.form h3{font-size:1.4rem;margin-bottom:4px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px}
+.field span{font-size:.85rem;font-weight:500;letter-spacing:.04em;opacity:.9}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;color:var(--navy);background:#fff;border:2px solid transparent;border-radius:14px;padding:12px 14px;width:100%;transition:border-color .2s}
+.field textarea{resize:vertical;min-height:90px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--orange)}
+.check{display:grid;grid-template-columns:22px 1fr;gap:12px;font-size:.92rem;line-height:1.45;opacity:.92;align-items:start}
+.check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--orange)}
+.form .btn{justify-self:start;margin-top:6px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 footer{background:#1a2752;color:rgba(255,255,255,.75);padding:44px 0;font-size:.92rem}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .foot img{width:150px}
@@ -260,6 +273,9 @@ footer{background:#1a2752;color:rgba(255,255,255,.75);padding:44px 0;font-size:.
   .person{display:grid;grid-template-columns:80px 1fr;gap:20px;align-items:center}
   .avatar{width:80px;height:80px;margin:0;font-size:1.7rem}
   .contact-list li{grid-template-columns:1fr;gap:4px}
+  .form{padding:26px 20px}
+  .form .row{grid-template-columns:1fr}
+  .form .btn{width:100%;justify-content:center}
   .contact-arc{width:340px;right:-140px}
   .foot{flex-direction:column;align-items:flex-start}
 }
@@ -477,18 +493,36 @@ footer{background:#1a2752;color:rgba(255,255,255,.75);padding:44px 0;font-size:.
     <div class="reveal">
       <span class="eyebrow">Kontakt</span>
       <h2>Prihláste dieťa na ukážkovú lekciu</h2>
-      <p class="lead" style="margin-top:24px">Napíšte nám meno a vek dieťaťa. Ozveme sa s najbližším voľným termínom.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-white" href="mailto:pezinok@almaludico.sk?subject=Uk%C3%A1%C5%BEkov%C3%A1%20lekcia">Napísať e-mail</a>
-        <a class="btn btn-ghost" href="tel:+421910553256">Zavolať</a>
-      </div>
+      <p class="lead" style="margin:24px 0 40px">Vyplňte formulár alebo nám zavolajte. Ozveme sa s najbližším voľným termínom.</p>
+      <ul class="contact-list">
+        <li><span class="k">Adresa</span><span class="v">Radničné námestie 3<br>902 01 Pezinok · 1. poschodie<br><a href="https://www.google.com/maps/search/?api=1&query=Radni%C4%8Dn%C3%A9+n%C3%A1mestie+3%2C+902+01+Pezinok" style="font-size:1rem;font-weight:400;opacity:.85;text-decoration:underline;text-underline-offset:4px">Otvoriť v mapách</a></span></li>
+        <li><span class="k">Telefón</span><a href="tel:+421910553256">+421 910 553 256</a></li>
+        <li><span class="k">E-mail</span><span><a href="mailto:pezinok@almaludico.sk">pezinok@almaludico.sk</a><br><a href="mailto:pezinok@mudrehranie.sk">pezinok@mudrehranie.sk</a></span></li>
+        <li><span class="k">Instagram</span><a href="https://www.instagram.com/almaludico_pezinok/">@almaludico_pezinok</a></li>
+      </ul>
     </div>
-    <ul class="contact-list reveal">
-      <li><span class="k">Adresa</span><span class="v">Radničné námestie 3<br>902 01 Pezinok · 1. poschodie<br><a href="https://www.google.com/maps/search/?api=1&query=Radni%C4%8Dn%C3%A9+n%C3%A1mestie+3%2C+902+01+Pezinok" style="font-size:1rem;font-weight:400;opacity:.85;text-decoration:underline;text-underline-offset:4px">Otvoriť v mapách</a></span></li>
-      <li><span class="k">Telefón</span><a href="tel:+421910553256">+421 910 553 256</a></li>
-      <li><span class="k">E-mail</span><span><a href="mailto:pezinok@almaludico.sk">pezinok@almaludico.sk</a><br><a href="mailto:pezinok@mudrehranie.sk">pezinok@mudrehranie.sk</a></span></li>
-      <li><span class="k">Instagram</span><a href="https://www.instagram.com/almaludico_pezinok/">@almaludico_pezinok</a></li>
-    </ul>
+    <form class="form reveal" name="prihlaska" method="POST" action="/dakujeme" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="prihlaska">
+      <input type="hidden" name="subject" value="Nová prihláška z webu Alma Ludico Pezinok">
+      <p class="hp" aria-hidden="true"><label>Nevypĺňajte: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <h3>Prihláška</h3>
+      <div class="row">
+        <label class="field"><span>Meno rodiča *</span><input name="meno" required autocomplete="name"></label>
+        <label class="field"><span>Telefón</span><input name="telefon" type="tel" autocomplete="tel" inputmode="tel"></label>
+      </div>
+      <label class="field"><span>E-mail *</span><input name="email" type="email" required autocomplete="email"></label>
+      <div class="row">
+        <label class="field"><span>Meno dieťaťa</span><input name="dieta"></label>
+        <label class="field"><span>Vek dieťaťa *</span>
+          <select name="vek" required><option value="">Vyberte</option><option>4 – 12 mesiacov</option><option>1 – 2 roky</option><option>2 – 4 roky</option></select></label>
+      </div>
+      <label class="field"><span>Mám záujem o *</span>
+        <select name="zaujem" required><option>Ukážková lekcia zdarma</option><option>Alma Klub (2 – 4 roky)</option><option>Lekcie s rodičom pre bábätká</option><option>Lekcie pre batoľatá</option><option>Workshop alebo beseda pre rodičov</option><option>Darčekový poukaz</option><option>Iné</option></select></label>
+      <label class="field"><span>Správa</span><textarea name="sprava" rows="3" placeholder="Napr. ktoré dni vám vyhovujú"></textarea></label>
+      <label class="check"><input type="checkbox" name="suhlas" value="áno" required><span>Súhlasím so spracovaním osobných údajov na účel vybavenia prihlášky. *</span></label>
+      <button class="btn btn-white" type="submit">Odoslať prihlášku
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
   </div>
 </section>
 </main>
